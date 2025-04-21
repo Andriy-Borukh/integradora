@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:fragment="layout (contenido)">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Título</title>
+</head>
+<body>
+<header>
+    <h1>Mi Aplicación</h1>
+</header>
+
+<!-- Aquí se insertará el contenido específico -->
+<div th:insert="${contenido}"></div>
+
+<footer>
+    <p>© 2025 Mi Empresa</p>
+</footer>
+</body>
+</html>

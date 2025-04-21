@@ -11,8 +11,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="app-admin.main" target="17" />
-      <module name="app-admin.test" target="17" />
       <module name="frontend" target="17" />
     </bytecodeTargetLevel>
   </component>
