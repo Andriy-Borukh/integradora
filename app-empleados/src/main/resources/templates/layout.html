@@ -4,17 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${titulo}">Título</title>
+    <link rel="stylesheet" href="/css/estilo-sobrio.css" id="estilo-sobrio">
+    <link rel="stylesheet" href="/css/estilo-decorado.css" id="estilo-decorado" disabled>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <header>
     <h1>Mi Aplicación</h1>
 </header>
 
-<!-- Aquí se insertará el contenido específico -->
-<div th:insert="${contenido}"></div>
+<nav>
+    <a href="/registro/empleado/paso1">Paso 1</a>
+    <a href="/registro/empleado/paso2">Paso 2</a>
+    <a href="/registro/empleado/paso3">Paso 3</a>
+    <a href="/registro/empleado/paso4">Paso 4</a>
+    <a href="/registro/empleado/resumen">Resumen</a>
+</nav>
+
+<main>
+    <div th:insert="${contenido}"></div>
+</main>
 
 <footer>
-    <p>© 2025 Mi Empresa</p>
+    <p>© 2025 Salvador Trincado</p>
 </footer>
+
+<script>
+    function activarEstiloDecorado(activar) {
+        document.getElementById("estilo-decorado").disabled = !activar;
+    }
+</script>
 </body>
 </html>
