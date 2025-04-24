@@ -3,6 +3,15 @@
       th:replace="~{layout :: layout(contenido = ~{::main})}">
 <th:block th:fragment="main">
   <main>
+    <nav class="barra-pasos">
+      <a th:href="@{/registro/empleado/paso1}" class="paso">Paso 1</a>
+      <a th:href="@{/registro/empleado/paso2}" class="paso">Paso 2</a>
+      <a th:href="@{/registro/empleado/paso3}" class="paso">Paso 3</a>
+      <a th:href="@{/registro/empleado/paso4}" class="paso">Paso 4</a>
+      <a th:href="@{/registro/empleado/paso5}" class="paso">Paso 5</a>
+    </nav>
+
+
     <h2>Registro de Empleado – Paso 4: Datos económicos</h2>
 
     <div class="botones-estilo">
