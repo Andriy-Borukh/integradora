@@ -1,96 +1,62 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="es" th:replace="~{layout :: layout(contenido = ~{::main})}">
-<head>
-    <title>Paso 1 - Datos personales</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      th:replace="~{layout :: layout(contenido = ~{::main})}">
 <th:block th:fragment="main">
-<main>
-    <h2>Registro de Empleado – Paso 1: Datos personales</h2>
+    <main>
+        <h2>Registro de Empleado – Paso 1: Datos personales</h2>
 
-    <form th:action="@{/registro/empleado/paso1}" th:object="${datosPersonales}" method="post" enctype="multipart/form-data">
-
-        <!-- Nombre -->
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required>
-        <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
-
-        <!-- Apellidos -->
-        <label for="apellidos">Apellidos</label>
-        <input type="text" id="apellidos" th:field="*{apellidos}" required>
-        <p th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></p>
-
-        <!-- Fotografía -->
-        <label for="fotografia">Fotografía (jpg/gif, máx 200KB)</label>
-        <input type="file" id="fotografia" th:field="*{fotografia}" accept=".jpg,.jpeg,.gif" required>
-        <p th:if="${#fields.hasErrors('fotografia')}" th:errors="*{fotografia}"></p>
-
-        <!-- Género -->
-        <label>Género</label>
-        <input type="radio" th:field="*{generoSeleccionado}" value="Femenino" id="generoF"> <label for="generoF">Femenino</label>
-        <input type="radio" th:field="*{generoSeleccionado}" value="Masculino" id="generoM"> <label for="generoM">Masculino</label>
-        <input type="radio" th:field="*{generoSeleccionado}" value="Otro" id="generoO"> <label for="generoO">Otro</label>
-        <p th:if="${#fields.hasErrors('generoSeleccionado')}" th:errors="*{generoSeleccionado}"></p>
-
-        <!-- Botones para género -->
-        <button type="button" onclick="deseleccionarGenero()">Deseleccionar género</button>
-        <button type="button" onclick="seleccionarPrimeroGenero()">Seleccionar primero</button>
-
-        <!-- Fecha nacimiento -->
-        <label for="fechaNacimiento">Fecha de nacimiento (dd/MM/yyyy)</label>
-        <input type="text" id="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="01/01/2000" required>
-        <p th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
-
-        <!-- Edad -->
-        <label for="edad">Edad</label>
-        <input type="number" id="edad" th:field="*{edad}" required>
-        <p th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></p>
-
-        <!-- País de nacimiento -->
-        <label for="paisNacimiento">País de nacimiento</label>
-        <select id="paisNacimiento" th:field="*{paisNacimiento}" required>
-            <option value="">-- Selecciona país --</option>
-            <option value="España">España</option>
-            <option value="Francia">Francia</option>
-            <option value="México">México</option>
-            <option value="Argentina">Argentina</option>
-        </select>
-        <p th:if="${#fields.hasErrors('paisNacimiento')}" th:errors="*{paisNacimiento}"></p>
-
-        <!-- Comentarios -->
-        <label for="comentarios">Comentarios</label>
-        <textarea id="comentarios" th:field="*{comentarios}" rows="3"></textarea>
-
-        <!-- Botones -->
         <div style="margin-top: 1rem;">
-            <input type="reset" value="Resetear formulario">
-            <button type="button" onclick="vaciarCampos()">Vaciar campos</button>
-            <input type="submit" value="Siguiente">
+            <button onclick="activarEstiloDecorado(true)">Decorado</button>
+            <button onclick="activarEstiloDecorado(false)">Sobrio</button>
         </div>
-    </form>
 
-    <!-- Botones de estilo -->
-    <div style="margin-top: 1rem;">
-        <button onclick="activarEstiloDecorado(true)">Activar estilo decorado</button>
-        <button onclick="activarEstiloDecorado(false)">Activar estilo sobrio</button>
-    </div>
-</main>
+        <form th:action="@{/registro/empleado/paso1}" th:object="${datosPersonales}" method="post" enctype="multipart/form-data">
+
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" th:field="*{nombre}">
+            <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></p>
+
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" th:field="*{apellidos}">
+            <p th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}" class="error"></p>
+
+            <label for="fotografia">Fotografía</label>
+            <input type="file" id="fotografia" th:field="*{fotografia}" accept=".jpg,.jpeg,.gif">
+            <p th:if="${#fields.hasErrors('fotografia')}" th:errors="*{fotografia}" class="error"></p>
+
+            <label>Género</label>
+            <input type="radio" th:field="*{generoSeleccionado}" value="Femenino"> Femenino
+            <input type="radio" th:field="*{generoSeleccionado}" value="Masculino"> Masculino
+            <input type="radio" th:field="*{generoSeleccionado}" value="Otro"> Otro
+            <p th:if="${#fields.hasErrors('generoSeleccionado')}" th:errors="*{generoSeleccionado}" class="error"></p>
+
+            <label for="fechaNacimiento">Fecha de nacimiento</label>
+            <input type="text" id="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="dd/MM/yyyy">
+            <p th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}" class="error"></p>
+
+            <label for="edad">Edad</label>
+            <input type="number" id="edad" th:field="*{edad}">
+            <p th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}" class="error"></p>
+
+            <label for="paisNacimiento">País de nacimiento</label>
+            <select id="paisNacimiento" th:field="*{paisNacimiento}">
+                <option value="">-- Selecciona país --</option>
+                <option value="España">España</option>
+                <option value="Francia">Francia</option>
+                <option value="México">México</option>
+                <option value="Argentina">Argentina</option>
+            </select>
+            <p th:if="${#fields.hasErrors('paisNacimiento')}" th:errors="*{paisNacimiento}" class="error"></p>
+
+            <label for="comentarios">Comentarios</label>
+            <textarea id="comentarios" th:field="*{comentarios}" rows="3"></textarea>
+
+            <div style="margin-top: 1rem;">
+                <input type="reset" value="Resetear formulario">
+                <button type="submit">Siguiente</button>
+            </div>
+        </form>
+
+
+    </main>
 </th:block>
-
-<script>
-    function deseleccionarGenero() {
-        document.querySelectorAll('input[name="generoSeleccionado"]').forEach(e => e.checked = false);
-    }
-
-    function seleccionarPrimeroGenero() {
-        const primero = document.querySelector('input[name="generoSeleccionado"]');
-        if (primero) primero.checked = true;
-    }
-
-    function vaciarCampos() {
-        document.querySelectorAll('form input[type="text"], form textarea').forEach(e => e.value = '');
-        document.querySelectorAll('form input[type="radio"], form input[type="checkbox"]').forEach(e => e.checked = false);
-        document.querySelectorAll('form select').forEach(e => e.selectedIndex = 0);
-    }
-</script>
-</body>
 </html>

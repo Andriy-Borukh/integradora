@@ -1,6 +1,5 @@
 package com.equipo.controller;
 
-
 import com.equipo.model.dto.DatosPersonalesDTO;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -10,28 +9,25 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.io.IOException;
 
 @Controller
-@SessionAttributes("datosPersonales")
 public class RegistroEmpleadoPaso1Controller {
 
     @GetMapping("/registro/empleado/paso1")
     public String mostrarFormulario(Model model) {
-            model.addAttribute("datosPersonales", new DatosPersonalesDTO());
-
+        model.addAttribute("datosPersonales", new DatosPersonalesDTO());
+        model.addAttribute("mostrarErrores", false);
         return "registro/empleado/paso1";
     }
+
 
     @PostMapping("/registro/empleado/paso1")
     public String procesarFormulario(@Valid @ModelAttribute("datosPersonales") DatosPersonalesDTO datos,
                                      BindingResult result,
-                                     Model model) {
-        // Validaciones adicionales
+                                     Model model,
+                                     HttpSession session) {
+
         MultipartFile foto = datos.getFotografia();
         if (foto == null || foto.isEmpty()) {
             result.rejectValue("fotografia", "error.fotografia", "La fotografía es obligatoria.");
@@ -50,6 +46,11 @@ public class RegistroEmpleadoPaso1Controller {
             return "registro/empleado/paso1";
         }
 
+        model.addAttribute("datosPersonales", datos); // para la vista
+
+        session.setAttribute("datosPersonales", datos);
+
         return "redirect:/registro/empleado/paso2";
+
     }
 }
